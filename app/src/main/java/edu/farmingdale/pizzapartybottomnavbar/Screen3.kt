@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,15 +36,27 @@ fun Screen3() {
     var sliderValue by remember { mutableStateOf(0.5f) }
     var chkd by remember { mutableStateOf(true) }
 
+    val gradientColors = listOf(Color.Cyan, Color.Blue)
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(
+            Brush.verticalGradient(
+                colors=gradientColors
+            )
+        )
+    )
 
     val context = LocalContext.current
-    Column ( modifier = Modifier.padding(horizontal = 20.dp).fillMaxSize(),
+    Column ( modifier = Modifier
+        .padding(horizontal = 20.dp)
+        .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
         Slider(value = sliderValue, onValueChange = { sliderValue=it }, Modifier.fillMaxWidth()
             , enabled = chkd)
 
-        Text (fontSize = 20.sp, text = "Second Screen" )
+        Text (fontSize = 20.sp, text = "Second Screen")
+        Text (fontSize = 20.sp, text = "Slider Value :$sliderValue")
 
         Button(onClick = { val newInt = Intent(Intent.ACTION_VIEW)
             newInt.setData(Uri.parse("tel:6314202000"))
